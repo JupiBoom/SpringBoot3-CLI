@@ -19,6 +19,7 @@
         <module>framework</module>
         <module>web</module>
         <module>main</module>
+        <module>notification</module>
     </modules>
 
     <properties>
@@ -52,7 +53,7 @@
 
     <dependencyManagement>
         <dependencies>
-            <!--common模块-->
+            <!--common模块-->            
             <dependency>
                 <groupId>com.rosy</groupId>
                 <artifactId>common</artifactId>
@@ -130,6 +131,14 @@
                 <version>${commons-lang3.version}</version>
             </dependency>
 
+            <!--Lombok-->            
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>1.18.34</version>
+                <scope>provided</scope>
+            </dependency>
+
             <!--easyexcel-->
             <dependency>
                 <groupId>com.alibaba</groupId>
@@ -200,4 +209,25 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.11.0</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                            <version>1.18.34</version>
+                        </path>
+                    </annotationProcessorPaths>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
