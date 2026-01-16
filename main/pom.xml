@@ -21,6 +21,12 @@
             <artifactId>common</artifactId>
         </dependency>
 
+        <!--meeting模块依赖-->
+        <dependency>
+            <groupId>com.rosy</groupId>
+            <artifactId>meeting</artifactId>
+        </dependency>
+
         <!--MySQL依赖-->
         <dependency>
             <groupId>mysql</groupId>
