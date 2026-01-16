@@ -19,6 +19,7 @@
         <module>framework</module>
         <module>web</module>
         <module>main</module>
+        <module>meeting</module>
     </modules>
 
     <properties>
@@ -77,6 +78,13 @@
             <dependency>
                 <groupId>com.rosy</groupId>
                 <artifactId>main</artifactId>
+                <version>0.0.1</version>
+            </dependency>
+
+            <!--meeting模块-->
+            <dependency>
+                <groupId>com.rosy</groupId>
+                <artifactId>meeting</artifactId>
                 <version>0.0.1</version>
             </dependency>
 
@@ -148,6 +156,16 @@
             <dependency>
                 <groupId>com.baomidou</groupId>
                 <artifactId>mybatis-plus-spring-boot3-starter</artifactId>
+                <version>${mybatis-plus-spring-boot3-starter.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-core</artifactId>
+                <version>${mybatis-plus-spring-boot3-starter.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-extension</artifactId>
                 <version>${mybatis-plus-spring-boot3-starter.version}</version>
             </dependency>
             <dependency>

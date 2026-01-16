@@ -1,5 +1,6 @@
 package com.rosy.framework.config;
 
+/*
 import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.OptimisticLockerInnerInterceptor;
@@ -18,3 +19,6 @@ public class MybatisPlusConfig {
         return interceptor;
     }
 }
+*/
+
+// TODO: 暂时注释，MyBatis Plus 3.5.9版本兼容性问题待解决
