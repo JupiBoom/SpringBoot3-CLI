@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rosy.main.mapper.LiveRoomProductMapper">
+
+    <select id="getProductRanking" resultType="com.rosy.main.domain.entity.LiveRoomProduct">
+        SELECT id, live_room_id, product_id, product_name, product_image, product_price, selling_point,
+               sort_order, status, order_count, sales_amount
+        FROM live_room_product
+        WHERE live_room_id = #{liveRoomId}
+          AND is_deleted = 0
+          AND status IN (1, 2)
+        ORDER BY sales_amount DESC, order_count DESC
+        LIMIT 10
+    </select>
+
+</mapper>
