@@ -19,6 +19,7 @@
         <module>framework</module>
         <module>web</module>
         <module>main</module>
+        <module>course</module>
     </modules>
 
     <properties>
