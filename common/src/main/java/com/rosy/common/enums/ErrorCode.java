@@ -1,9 +1,5 @@
 package com.rosy.common.enums;
 
-import lombok.Getter;
-
-
-@Getter
 public enum ErrorCode {
 
     SUCCESS(0, "success"),
@@ -17,14 +13,7 @@ public enum ErrorCode {
     SYSTEM_ERROR(50000, "系统内部异常"),
     OPERATION_ERROR(50001, "操作失败");
 
-    /**
-     * 状态码
-     */
     private final int code;
-
-    /**
-     * 信息
-     */
     private final String message;
 
     ErrorCode(int code, String message) {
@@ -32,4 +21,11 @@ public enum ErrorCode {
         this.message = message;
     }
 
+    public int getCode() {
+        return code;
+    }
+
+    public String getMessage() {
+        return message;
+    }
 }
