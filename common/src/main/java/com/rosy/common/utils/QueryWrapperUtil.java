@@ -86,6 +86,26 @@ public class QueryWrapperUtil {
     }
 
     /**
+     * 添加范围查询条件
+     *
+     * @param queryWrapper 查询构造器
+     * @param startTime    开始时间
+     * @param endTime      结束时间
+     * @param column       数据库字段映射
+     * @param <T>          实体类型
+     * @param <R>          字段类型
+     */
+    public static <T, R> void addBetweenCondition(LambdaQueryWrapper<T> queryWrapper, R startTime, R endTime, SFunction<T, R> column) {
+        if (startTime != null && endTime != null) {
+            queryWrapper.between(column, startTime, endTime);
+        } else if (startTime != null) {
+            queryWrapper.ge(column, startTime);
+        } else if (endTime != null) {
+            queryWrapper.le(column, endTime);
+        }
+    }
+
+    /**
      * 获取字段映射（示例方法）
      *
      * @param <T> 实体类型
