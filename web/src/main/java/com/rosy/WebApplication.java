@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
-@SpringBootApplication
-@ConfigurationPropertiesScan("com.rosy.framework.config")
+@SpringBootApplication(scanBasePackages = {"com.rosy"})
+@ConfigurationPropertiesScan({"com.rosy.framework.config", "com.rosy.course.config"})
 @EnableAspectJAutoProxy
 @MapperScan("com.rosy.**.mapper")
 public class WebApplication {
