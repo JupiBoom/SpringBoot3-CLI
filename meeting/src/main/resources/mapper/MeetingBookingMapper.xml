@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rosy.meeting.mapper.MeetingBookingMapper">
+
+    <resultMap id="BaseResultMap" type="com.rosy.meeting.domain.entity.MeetingBooking">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="meeting_room_id" property="meetingRoomId" jdbcType="BIGINT"/>
+        <result column="user_id" property="userId" jdbcType="BIGINT"/>
+        <result column="user_name" property="userName" jdbcType="VARCHAR"/>
+        <result column="start_time" property="startTime" jdbcType="TIMESTAMP"/>
+        <result column="end_time" property="endTime" jdbcType="TIMESTAMP"/>
+        <result column="reason" property="reason" jdbcType="VARCHAR"/>
+        <result column="participant_count" property="participantCount" jdbcType="INTEGER"/>
+        <result column="status" property="status" jdbcType="INTEGER"/>
+        <result column="approver_id" property="approverId" jdbcType="BIGINT"/>
+        <result column="approve_time" property="approveTime" jdbcType="TIMESTAMP"/>
+        <result column="approve_remark" property="approveRemark" jdbcType="VARCHAR"/>
+        <result column="check_in_count" property="checkInCount" jdbcType="INTEGER"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <select id="countOverlappingBookings" resultType="java.lang.Integer">
+        SELECT COUNT(*)
+        FROM meeting_booking
+        WHERE meeting_room_id = #{meetingRoomId}
+          AND status IN (0, 1)
+          AND id != #{excludeId}
+          AND ((start_time &lt; #{endTime} AND start_time &gt;= #{startTime})
+            OR (end_time &gt; #{startTime} AND end_time &lt;= #{endTime})
+            OR (start_time &lt;= #{startTime} AND end_time &gt;= #{endTime}))
+    </select>
+
+    <select id="findBookingsByTimeRange" resultMap="BaseResultMap">
+        SELECT *
+        FROM meeting_booking
+        WHERE meeting_room_id = #{meetingRoomId}
+          AND status IN (0, 1)
+          AND ((start_time &lt; #{endTime} AND start_time &gt;= #{startTime})
+            OR (end_time &gt; #{startTime} AND end_time &lt;= #{endTime})
+            OR (start_time &lt;= #{startTime} AND end_time &gt;= #{endTime}))
+        ORDER BY start_time
+    </select>
+
+    <select id="findBookingsByUserId" resultMap="BaseResultMap">
+        SELECT *
+        FROM meeting_booking
+        WHERE user_id = #{userId}
+        ORDER BY create_time DESC
+    </select>
+
+    <select id="countBookingsByMeetingRoomId" resultType="java.lang.Integer">
+        SELECT COUNT(*)
+        FROM meeting_booking
+        WHERE meeting_room_id = #{meetingRoomId}
+    </select>
+
+    <select id="countBookingsByMeetingRoomIdAndTimeRange" resultType="java.lang.Integer">
+        SELECT COUNT(*)
+        FROM meeting_booking
+        WHERE meeting_room_id = #{meetingRoomId}
+          AND start_time &gt;= #{startTime}
+          AND end_time &lt;= #{endTime}
+    </select>
+
+    <select id="countCompletedMeetingsByMeetingRoomId" resultType="java.lang.Integer">
+        SELECT COUNT(*)
+        FROM meeting_booking
+        WHERE meeting_room_id = #{meetingRoomId}
+          AND status = 1
+          AND end_time &lt; NOW()
+    </select>
+
+    <select id="countCancelledMeetingsByMeetingRoomId" resultType="java.lang.Integer">
+        SELECT COUNT(*)
+        FROM meeting_booking
+        WHERE meeting_room_id = #{meetingRoomId}
+          AND status = 3
+    </select>
+
+    <select id="findCompletedMeetingsCheckInInfo" resultMap="BaseResultMap">
+        SELECT id, participant_count, check_in_count
+        FROM meeting_booking
+        WHERE meeting_room_id = #{meetingRoomId}
+          AND status = 1
+          AND end_time &lt; NOW()
+          AND participant_count &gt; 0
+    </select>
+
+</mapper>
