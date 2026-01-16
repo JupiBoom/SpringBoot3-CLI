@@ -9,9 +9,8 @@ import java.io.Serial;
 import java.util.HashMap;
 import java.util.Objects;
 
-@EqualsAndHashCode(callSuper = true)
 @Data
-public class ApiResponse extends HashMap<String, Object> {
+public class ApiResponse<T> extends HashMap<String, Object> {
     /**
      * 状态码
      */
@@ -51,7 +50,7 @@ public class ApiResponse extends HashMap<String, Object> {
      * @param msg  返回内容
      * @param data 数据对象
      */
-    public ApiResponse(int code, String msg, Object data) {
+    public ApiResponse(int code, String msg, T data) {
         super.put(CODE_TAG, code);
         super.put(MSG_TAG, msg);
         if (StringUtils.isNotNull(data)) {
@@ -64,7 +63,7 @@ public class ApiResponse extends HashMap<String, Object> {
      *
      * @return 成功消息
      */
-    public static ApiResponse success() {
+    public static <T> ApiResponse<T> success() {
         return ApiResponse.success("操作成功");
     }
 
@@ -73,7 +72,7 @@ public class ApiResponse extends HashMap<String, Object> {
      *
      * @return 成功消息
      */
-    public static ApiResponse success(Object data) {
+    public static <T> ApiResponse<T> success(T data) {
         return ApiResponse.success("操作成功", data);
     }
 
@@ -83,7 +82,7 @@ public class ApiResponse extends HashMap<String, Object> {
      * @param msg 返回内容
      * @return 成功消息
      */
-    public static ApiResponse success(String msg) {
+    public static <T> ApiResponse<T> success(String msg) {
         return ApiResponse.success(msg, null);
     }
 
@@ -94,8 +93,8 @@ public class ApiResponse extends HashMap<String, Object> {
      * @param data 数据对象
      * @return 成功消息
      */
-    public static ApiResponse success(String msg, Object data) {
-        return new ApiResponse(ErrorCode.SUCCESS.getCode(), msg, data);
+    public static <T> ApiResponse<T> success(String msg, T data) {
+        return new ApiResponse<>(ErrorCode.SUCCESS.getCode(), msg, data);
     }
 
     /**
@@ -104,7 +103,7 @@ public class ApiResponse extends HashMap<String, Object> {
      * @param msg 返回内容
      * @return 警告消息
      */
-    public static ApiResponse warn(String msg) {
+    public static <T> ApiResponse<T> warn(String msg) {
         return ApiResponse.warn(msg, null);
     }
 
@@ -115,8 +114,8 @@ public class ApiResponse extends HashMap<String, Object> {
      * @param data 数据对象
      * @return 警告消息
      */
-    public static ApiResponse warn(String msg, Object data) {
-        return new ApiResponse(ErrorCode.WARN.getCode(), msg, data);
+    public static <T> ApiResponse<T> warn(String msg, T data) {
+        return new ApiResponse<>(ErrorCode.WARN.getCode(), msg, data);
     }
 
     /**
@@ -124,7 +123,7 @@ public class ApiResponse extends HashMap<String, Object> {
      *
      * @return 错误消息
      */
-    public static ApiResponse error() {
+    public static <T> ApiResponse<T> error() {
         return ApiResponse.error("操作失败");
     }
 
@@ -134,7 +133,7 @@ public class ApiResponse extends HashMap<String, Object> {
      * @param msg 返回内容
      * @return 错误消息
      */
-    public static ApiResponse error(String msg) {
+    public static <T> ApiResponse<T> error(String msg) {
         return ApiResponse.error(msg, null);
     }
 
@@ -145,8 +144,8 @@ public class ApiResponse extends HashMap<String, Object> {
      * @param data 数据对象
      * @return 错误消息
      */
-    public static ApiResponse error(String msg, Object data) {
-        return new ApiResponse(ErrorCode.ERROR.getCode(), msg, data);
+    public static <T> ApiResponse<T> error(String msg, T data) {
+        return new ApiResponse<>(ErrorCode.ERROR.getCode(), msg, data);
     }
 
     /**
@@ -156,8 +155,8 @@ public class ApiResponse extends HashMap<String, Object> {
      * @param msg  返回内容
      * @return 错误消息
      */
-    public static ApiResponse error(int code, String msg) {
-        return new ApiResponse(code, msg, null);
+    public static <T> ApiResponse<T> error(int code, String msg) {
+        return new ApiResponse<>(code, msg, null);
     }
 
     /**
@@ -195,7 +194,7 @@ public class ApiResponse extends HashMap<String, Object> {
      * @return 数据对象
      */
     @Override
-    public ApiResponse put(String key, Object value) {
+    public ApiResponse<T> put(String key, Object value) {
         super.put(key, value);
         return this;
     }
