@@ -4,35 +4,33 @@ import lombok.Data;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Data
 public class UserVO implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
-    /**
-     * id
-     */
+
     private Long id;
-    /**
-     * 用户昵称
-     */
-    private String userName;
-    /**
-     * 用户头像
-     */
-    private String userAvatar;
-    /**
-     * 用户简介
-     */
-    private String userProfile;
-    /**
-     * 用户角色：user/admin/ban
-     */
-    private String userRole;
-    /**
-     * 创建时间
-     */
-    private Date createTime;
+
+    private String username;
+
+    private String realName;
+
+    private String phone;
+
+    private String email;
+
+    private String avatar;
+
+    private Byte role;
+
+    private String roleName;
+
+    private Byte status;
+
+    private String statusName;
+
+    private LocalDateTime createTime;
 }
