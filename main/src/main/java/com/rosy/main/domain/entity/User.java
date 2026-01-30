@@ -1,21 +1,30 @@
-package com.rosy.main.domain.vo;
+package com.rosy.main.domain.entity;
+
+import com.baomidou.mybatisplus.annotation.*;
 
 import java.time.LocalDateTime;
 
 /**
- * 用户VO类
+ * 用户实体类
  */
-public class UserVO {
+@TableName("user")
+public class User {
 
     /**
-     * ID
+     * ID，必须为正整数
      */
+    @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
     /**
      * 用户名
      */
     private String username;
+
+    /**
+     * 密码
+     */
+    private String password;
 
     /**
      * 真实姓名
@@ -43,29 +52,27 @@ public class UserVO {
     private Integer role;
 
     /**
-     * 角色描述
-     */
-    private String roleDesc;
-
-    /**
      * 状态：0-禁用，1-启用
      */
     private Integer status;
 
     /**
-     * 状态描述
-     */
-    private String statusDesc;
-
-    /**
      * 创建时间
      */
+    @TableField(fill = FieldFill.INSERT)
     private LocalDateTime createTime;
 
     /**
      * 更新时间
      */
+    @TableField(fill = FieldFill.INSERT_UPDATE)
     private LocalDateTime updateTime;
+
+    /**
+     * 逻辑删除字段，0 或 1
+     */
+    @TableLogic
+    private Integer isDeleted;
 
     // Getter and Setter methods
     public Long getId() {
@@ -82,6 +89,14 @@ public class UserVO {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getRealName() {
@@ -124,28 +139,12 @@ public class UserVO {
         this.role = role;
     }
 
-    public String getRoleDesc() {
-        return roleDesc;
-    }
-
-    public void setRoleDesc(String roleDesc) {
-        this.roleDesc = roleDesc;
-    }
-
     public Integer getStatus() {
         return status;
     }
 
     public void setStatus(Integer status) {
         this.status = status;
-    }
-
-    public String getStatusDesc() {
-        return statusDesc;
-    }
-
-    public void setStatusDesc(String statusDesc) {
-        this.statusDesc = statusDesc;
     }
 
     public LocalDateTime getCreateTime() {
@@ -162,5 +161,13 @@ public class UserVO {
 
     public void setUpdateTime(LocalDateTime updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public Integer getIsDeleted() {
+        return isDeleted;
+    }
+
+    public void setIsDeleted(Integer isDeleted) {
+        this.isDeleted = isDeleted;
     }
 }
