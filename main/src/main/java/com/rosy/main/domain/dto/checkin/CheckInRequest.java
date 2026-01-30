@@ -1,0 +1,22 @@
+package com.rosy.main.domain.dto.checkin;
+
+import jakarta.validation.constraints.NotNull;
+import lombok.Data;
+
+import java.io.Serial;
+import java.io.Serializable;
+
+@Data
+public class CheckInRequest implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 1L;
+
+    @NotNull(message = "预约ID不能为空")
+    private Long bookingId;
+
+    @NotNull(message = "用户ID不能为空")
+    private Long userId;
+
+    private String userName;
+}
