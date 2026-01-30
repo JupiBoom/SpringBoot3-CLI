@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rosy.main.mapper.BookingMapper">
+
+    <select id="findConflictingBookings" resultType="com.rosy.main.domain.entity.Booking">
+        SELECT * FROM booking
+        WHERE room_id = #{roomId}
+        AND is_deleted = 0
+        AND status IN (0, 1)
+        AND (
+            (start_time &lt; #{endTime} AND end_time &gt; #{startTime})
+            OR (start_time = #{startTime})
+            OR (end_time = #{endTime})
+        )
+        <if test="excludeBookingId != null">
+            AND id != #{excludeBookingId}
+        </if>
+    </select>
+
+    <select id="getBookingDetail" resultType="com.rosy.main.domain.vo.BookingVO">
+        SELECT 
+            b.id,
+            b.room_id,
+            mr.name as room_name,
+            b.user_id,
+            b.start_time,
+            b.end_time,
+            b.subject,
+            b.attendees_count,
+            b.remarks,
+            b.status,
+            b.create_time,
+            b.update_time
+        FROM booking b
+        LEFT JOIN meeting_room mr ON b.room_id = mr.id
+        WHERE b.id = #{id}
+        AND b.is_deleted = 0
+    </select>
+
+</mapper>
