@@ -61,4 +61,9 @@ public class ItemVO implements Serializable {
      * 排序字段，用于控制物品显示顺序
      */
     private Integer sortOrder;
+
+    /**
+     * 商品卖点
+     */
+    private String sellingPoints;
 }
