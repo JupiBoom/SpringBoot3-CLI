@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rosy.main.mapper.ServiceRecordMapper">
+
+    <resultMap id="ServiceRecordVOResultMap" type="com.rosy.main.domain.vo.ServiceRecordVO">
+        <id column="id" property="id"/>
+        <result column="registration_id" property="registrationId"/>
+        <result column="activity_id" property="activityId"/>
+        <result column="activity_title" property="activityTitle"/>
+        <result column="user_id" property="userId"/>
+        <result column="service_date" property="serviceDate"/>
+        <result column="start_time" property="startTime"/>
+        <result column="end_time" property="endTime"/>
+        <result column="duration" property="duration"/>
+        <result column="certificate_no" property="certificateNo"/>
+        <result column="certificate_url" property="certificateUrl"/>
+        <result column="generate_time" property="generateTime"/>
+        <result column="create_time" property="createTime"/>
+    </resultMap>
+
+    <select id="selectServiceRecordDetail" resultMap="ServiceRecordVOResultMap">
+        SELECT sr.id, sr.registration_id, sr.activity_id, a.title as activity_title,
+               sr.user_id, sr.service_date, sr.start_time, sr.end_time, sr.duration,
+               sr.certificate_no, sr.certificate_url, sr.generate_time, sr.create_time
+        FROM service_record sr
+        LEFT JOIN activity a ON sr.activity_id = a.id
+        WHERE sr.id = #{id} AND sr.is_deleted = 0
+    </select>
+
+    <select id="selectByUserId" resultMap="ServiceRecordVOResultMap">
+        SELECT sr.id, sr.registration_id, sr.activity_id, a.title as activity_title,
+               sr.user_id, sr.service_date, sr.start_time, sr.end_time, sr.duration,
+               sr.certificate_no, sr.certificate_url, sr.generate_time, sr.create_time
+        FROM service_record sr
+        LEFT JOIN activity a ON sr.activity_id = a.id
+        WHERE sr.user_id = #{userId} AND sr.is_deleted = 0
+        ORDER BY sr.service_date DESC
+    </select>
+
+    <select id="selectByRegistrationId" resultType="com.rosy.main.domain.entity.ServiceRecord">
+        SELECT * FROM service_record
+        WHERE registration_id = #{registrationId} AND is_deleted = 0
+    </select>
+
+</mapper>
