@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rosy.main.mapper.CourseResourceMapper">
+
+    <resultMap id="BaseResultMap" type="com.rosy.main.domain.entity.CourseResource">
+        <id column="id" property="id"/>
+        <result column="course_id" property="courseId"/>
+        <result column="resource_name" property="resourceName"/>
+        <result column="resource_type" property="resourceType"/>
+        <result column="file_url" property="fileUrl"/>
+        <result column="file_size" property="fileSize"/>
+        <result column="description" property="description"/>
+        <result column="status" property="status"/>
+        <result column="download_count" property="downloadCount"/>
+        <result column="creator_id" property="creatorId"/>
+        <result column="create_time" property="createTime"/>
+        <result column="updater_id" property="updaterId"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="version" property="version"/>
+        <result column="is_deleted" property="isDeleted"/>
+    </resultMap>
+
+    <update id="incrementDownloadCount">
+        UPDATE course_resource SET download_count = download_count + 1 WHERE id = #{id}
+    </update>
+
+</mapper>
