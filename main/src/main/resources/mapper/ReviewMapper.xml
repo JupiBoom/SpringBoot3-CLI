@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rosy.main.mapper.ReviewMapper">
+
+    <resultMap id="ReviewVOResultMap" type="com.rosy.main.domain.vo.ReviewVO">
+        <id column="id" property="id"/>
+        <result column="activity_id" property="activityId"/>
+        <result column="activity_title" property="activityTitle"/>
+        <result column="user_id" property="userId"/>
+        <result column="user_name" property="userName"/>
+        <result column="user_avatar" property="userAvatar"/>
+        <result column="registration_id" property="registrationId"/>
+        <result column="rating" property="rating"/>
+        <result column="content" property="content"/>
+        <result column="tags" property="tags"/>
+        <result column="create_time" property="createTime"/>
+    </resultMap>
+
+    <select id="selectReviewDetail" resultMap="ReviewVOResultMap">
+        SELECT r.id, r.activity_id, a.title as activity_title, r.user_id,
+               u.real_name as user_name, u.avatar as user_avatar, r.registration_id,
+               r.rating, r.content, r.tags, r.create_time
+        FROM review r
+        LEFT JOIN activity a ON r.activity_id = a.id
+        LEFT JOIN user u ON r.user_id = u.id
+        WHERE r.id = #{id} AND r.is_deleted = 0
+    </select>
+
+    <select id="selectByActivityId" resultMap="ReviewVOResultMap">
+        SELECT r.id, r.activity_id, a.title as activity_title, r.user_id,
+               u.real_name as user_name, u.avatar as user_avatar, r.registration_id,
+               r.rating, r.content, r.tags, r.create_time
+        FROM review r
+        LEFT JOIN activity a ON r.activity_id = a.id
+        LEFT JOIN user u ON r.user_id = u.id
+        WHERE r.activity_id = #{activityId} AND r.is_deleted = 0
+        ORDER BY r.create_time DESC
+    </select>
+
+    <select id="selectByUserId" resultMap="ReviewVOResultMap">
+        SELECT r.id, r.activity_id, a.title as activity_title, r.user_id,
+               u.real_name as user_name, u.avatar as user_avatar, r.registration_id,
+               r.rating, r.content, r.tags, r.create_time
+        FROM review r
+        LEFT JOIN activity a ON r.activity_id = a.id
+        LEFT JOIN user u ON r.user_id = u.id
+        WHERE r.user_id = #{userId} AND r.is_deleted = 0
+        ORDER BY r.create_time DESC
+    </select>
+
+    <select id="selectByActivityAndUser" resultType="com.rosy.main.domain.entity.Review">
+        SELECT * FROM review
+        WHERE activity_id = #{activityId} AND user_id = #{userId} AND is_deleted = 0
+        LIMIT 1
+    </select>
+
+</mapper>

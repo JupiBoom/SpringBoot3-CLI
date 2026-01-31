@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rosy.main.mapper.RegistrationMapper">
+
+    <resultMap id="RegistrationVOResultMap" type="com.rosy.main.domain.vo.RegistrationVO">
+        <id column="id" property="id"/>
+        <result column="activity_id" property="activityId"/>
+        <result column="activity_title" property="activityTitle"/>
+        <result column="user_id" property="userId"/>
+        <result column="user_name" property="userName"/>
+        <result column="user_phone" property="userPhone"/>
+        <result column="reason" property="reason"/>
+        <result column="status" property="status"/>
+        <result column="check_in_time" property="checkInTime"/>
+        <result column="check_out_time" property="checkOutTime"/>
+        <result column="service_duration" property="serviceDuration"/>
+        <result column="create_time" property="createTime"/>
+        <result column="activity_start_time" property="activityStartTime"/>
+        <result column="activity_location" property="activityLocation"/>
+    </resultMap>
+
+    <select id="selectRegistrationDetail" resultMap="RegistrationVOResultMap">
+        SELECT r.id, r.activity_id, a.title as activity_title, r.user_id, r.user_name,
+               r.user_phone, r.reason, r.status, r.check_in_time, r.check_out_time,
+               r.service_duration, r.create_time, a.start_time as activity_start_time,
+               a.location as activity_location
+        FROM registration r
+        LEFT JOIN activity a ON r.activity_id = a.id
+        WHERE r.id = #{id} AND r.is_deleted = 0
+    </select>
+
+    <select id="selectByActivityId" resultMap="RegistrationVOResultMap">
+        SELECT r.id, r.activity_id, a.title as activity_title, r.user_id, r.user_name,
+               r.user_phone, r.reason, r.status, r.check_in_time, r.check_out_time,
+               r.service_duration, r.create_time, a.start_time as activity_start_time,
+               a.location as activity_location
+        FROM registration r
+        LEFT JOIN activity a ON r.activity_id = a.id
+        WHERE r.activity_id = #{activityId} AND r.is_deleted = 0
+        ORDER BY r.create_time DESC
+    </select>
+
+    <select id="selectByUserId" resultMap="RegistrationVOResultMap">
+        SELECT r.id, r.activity_id, a.title as activity_title, r.user_id, r.user_name,
+               r.user_phone, r.reason, r.status, r.check_in_time, r.check_out_time,
+               r.service_duration, r.create_time, a.start_time as activity_start_time,
+               a.location as activity_location
+        FROM registration r
+        LEFT JOIN activity a ON r.activity_id = a.id
+        WHERE r.user_id = #{userId} AND r.is_deleted = 0
+        ORDER BY r.create_time DESC
+    </select>
+
+    <select id="selectApprovedRegistrations" resultType="com.rosy.main.domain.entity.Registration">
+        SELECT * FROM registration
+        WHERE activity_id = #{activityId} AND status = 1 AND is_deleted = 0
+    </select>
+
+    <select id="selectUserApprovedRegistrations" resultType="com.rosy.main.domain.entity.Registration">
+        SELECT * FROM registration
+        WHERE user_id = #{userId} AND status = 1
+        AND check_out_time IS NULL
+        AND is_deleted = 0
+    </select>
+
+</mapper>

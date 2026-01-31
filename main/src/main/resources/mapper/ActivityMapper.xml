@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rosy.main.mapper.ActivityMapper">
+
+    <resultMap id="ActivityVOResultMap" type="com.rosy.main.domain.vo.ActivityVO">
+        <id column="id" property="id"/>
+        <result column="title" property="title"/>
+        <result column="description" property="description"/>
+        <result column="category" property="category"/>
+        <result column="location" property="location"/>
+        <result column="start_time" property="startTime"/>
+        <result column="end_time" property="endTime"/>
+        <result column="required_num" property="requiredNum"/>
+        <result column="registered_num" property="registeredNum"/>
+        <result column="status" property="status"/>
+        <result column="contact_person" property="contactPerson"/>
+        <result column="contact_phone" property="contactPhone"/>
+        <result column="requirements" property="requirements"/>
+        <result column="create_time" property="createTime"/>
+    </resultMap>
+
+    <select id="selectActivityDetail" resultMap="ActivityVOResultMap">
+        SELECT id, title, description, category, location, start_time, end_time,
+               required_num, registered_num, status, contact_person, contact_phone,
+               requirements, create_time
+        FROM activity
+        WHERE id = #{id} AND is_deleted = 0
+    </select>
+
+    <select id="selectActivitiesStartingInOneHour" resultType="com.rosy.main.domain.entity.Activity">
+        SELECT * FROM activity
+        WHERE status = 1
+        AND start_time BETWEEN #{now} AND #{oneHourLater}
+        AND is_deleted = 0
+    </select>
+
+    <select id="selectActivitiesToUpdateStatus" resultType="com.rosy.main.domain.entity.Activity">
+        SELECT * FROM activity
+        WHERE status IN (1, 2)
+        AND is_deleted = 0
+    </select>
+
+</mapper>
