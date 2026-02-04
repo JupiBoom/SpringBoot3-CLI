@@ -1,0 +1,9 @@
+2026-02-04 13:20:24.080 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
+2026-02-04 13:20:24.148 [restartedMain] INFO  com.rosy.WebApplication - Starting WebApplication using Java 21.0.6 with PID 21008 (D:\work\code\money\VolunServe_kimi_k2.5\web\target\classes started by qiaoqiao in D:\work\code\money\VolunServe_kimi_k2.5\web)
+2026-02-04 13:20:24.150 [restartedMain] INFO  com.rosy.WebApplication - The following 1 profile is active: "dev"
+2026-02-04 13:20:24.222 [restartedMain] INFO  o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-02-04 13:20:24.222 [restartedMain] INFO  o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-02-04 13:20:25.448 [restartedMain] INFO  o.s.c.i.s.PathMatchingResourcePatternResolver - Skipping search for files matching pattern [**/*.class]: directory [D:\work\code\money\VolunServe_kimi_k2.5\web\target\classes\com\rosy\framework\config] does not exist
+2026-02-04 13:20:25.458 [restartedMain] INFO  o.s.b.a.logging.ConditionEvaluationReportLogger - 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
