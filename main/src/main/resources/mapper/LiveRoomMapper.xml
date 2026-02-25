@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rosy.main.mapper.LiveRoomMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.rosy.main.domain.entity.LiveRoom">
+        <id column="id" property="id"/>
+        <result column="title" property="title"/>
+        <result column="cover_image" property="coverImage"/>
+        <result column="streamer_id" property="streamerId"/>
+        <result column="streamer_name" property="streamerName"/>
+        <result column="status" property="status"/>
+        <result column="start_time" property="startTime"/>
+        <result column="end_time" property="endTime"/>
+        <result column="room_desc" property="roomDesc"/>
+        <result column="current_item_id" property="currentItemId"/>
+        <result column="viewer_count" property="viewerCount"/>
+        <result column="total_viewers" property="totalViewers"/>
+        <result column="like_count" property="likeCount"/>
+        <result column="order_count" property="orderCount"/>
+        <result column="sales_amount" property="salesAmount"/>
+        <result column="creator_id" property="creatorId"/>
+        <result column="create_time" property="createTime"/>
+        <result column="updater_id" property="updaterId"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="version" property="version"/>
+        <result column="is_deleted" property="isDeleted"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, title, cover_image, streamer_id, streamer_name, status, start_time, end_time, room_desc,
+        current_item_id, viewer_count, total_viewers, like_count, order_count, sales_amount,
+        creator_id, create_time, updater_id, update_time, version, is_deleted
+    </sql>
+
+</mapper>
