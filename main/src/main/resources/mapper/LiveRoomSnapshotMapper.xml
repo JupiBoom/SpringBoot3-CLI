@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rosy.main.mapper.LiveRoomSnapshotMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.rosy.main.domain.entity.LiveRoomSnapshot">
+        <id column="id" property="id"/>
+        <result column="room_id" property="roomId"/>
+        <result column="snapshot_time" property="snapshotTime"/>
+        <result column="viewer_count" property="viewerCount"/>
+        <result column="total_viewers" property="totalViewers"/>
+        <result column="like_count" property="likeCount"/>
+        <result column="order_count" property="orderCount"/>
+        <result column="sales_amount" property="salesAmount"/>
+        <result column="new_orders" property="newOrders"/>
+        <result column="new_sales" property="newSales"/>
+        <result column="create_time" property="createTime"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, room_id, snapshot_time, viewer_count, total_viewers, like_count, order_count, sales_amount,
+        new_orders, new_sales, create_time
+    </sql>
+
+</mapper>
