@@ -5,10 +5,12 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
 @ConfigurationPropertiesScan("com.rosy.framework.config")
 @EnableAspectJAutoProxy
+@EnableScheduling
 @MapperScan("com.rosy.**.mapper")
 public class WebApplication {
     public static void main(String[] args) {
