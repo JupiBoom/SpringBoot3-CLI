@@ -2,7 +2,6 @@ USE `example`;
 
 DROP TABLE IF EXISTS `item`;
 CREATE TABLE IF NOT EXISTS `item`
-(
     `id`          BIGINT UNSIGNED AUTO_INCREMENT COMMENT 'ID，必须为正整数' PRIMARY KEY,
     `name`        VARCHAR(100)     DEFAULT NULL COMMENT '名称，最大长度 100，可选',
     `description` VARCHAR(500)     DEFAULT NULL COMMENT '简介/内容，最大长度 500，可选',
